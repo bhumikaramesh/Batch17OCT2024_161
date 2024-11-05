@@ -1,0 +1,6 @@
+total 16
+-rw-rw-r-- 1 bhima bhima    0 Oct 23 10:57 file1.txt
+drwxrwxr-x 2 bhima bhima 4096 Oct 23 10:34 lib
+drwxrwxr-x 2 bhima bhima 4096 Oct 23 10:34 obj
+drwxrwxr-x 2 bhima bhima 4096 Oct 23 10:34 scripts
+-rw-rw-r-- 1 bhima bhima   46 Oct 23 10:53 test1.c
