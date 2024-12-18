@@ -1,0 +1,50 @@
+        -:    0:Source:sample.c
+        -:    0:Graph:sample.gcno
+        -:    0:Data:sample.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h> 
+        -:    3:#include <string.h> 
+        -:    4:
+        -:    5:extern void link_file();
+        -:    6:const int MAXARGS = 16;
+        -:    7:
+        2:    8:int main( int argc, char* argv[] ) 
+        -:    9:{
+        -:   10:    int i;
+        -:   11:    int *ptr;
+        -:   12: 
+        -:   13:   /* Establish pair-wise equality between arguments */
+        5:   14:    for (i = 1; i < argc-1; i++) 
+        -:   15:    {
+        3:   16:        if (0 == strcmp(argv[i],argv[i+1])) 
+        -:   17:        {
+        2:   18:            printf("Check!\n");
+        -:   19:        }
+        1:   20:        else if ( 0 == strcmp(argv[i],"Hey!" )) 
+        -:   21:        {
+    #####:   22:            printf("Huh?\n");
+        -:   23:        }
+        -:   24:        else 
+        -:   25:        {
+        1:   26:            printf("oops\n");
+        -:   27:        }
+        -:   28:    }
+        -:   29:
+        2:   30:   ptr = (int *) malloc(sizeof(int) * 10);
+        -:   31:
+        2:   32:    if (ptr == NULL)
+        -:   33:    {
+    #####:   34:        printf("Unable to allocate memory\n");
+    #####:   35:        exit(1);
+        -:   36:    }
+        2:   37:    ptr[0]=1;
+        2:   38:    ptr[1]=2;
+        -:   39:   
+        2:   40:    free(ptr);
+        -:   41:    
+        2:   42:    link_file();
+        2:   43:    return 0;
+        -:   44:}
+        -:   45:

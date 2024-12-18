@@ -1,0 +1,2 @@
+#Include<stdio.h>
+:wq

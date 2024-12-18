@@ -1,0 +1,34 @@
+
+
+
+char a='D'
+
+char Name[5]={'H','e','l','l','0'};
+
+
+int arr[5] ={1,2,3,4,5};
+
+for(i=0;i<5;i++)
+	printf("%d",arr[i]);
+
+for(i=0;i<5;i++)
+	printf("%c",Name[i]);
+
+
+char Name[6] = {'H','e','l','l','0','\0'};
+char Name[6] = "Hello";
+char Greet[] = "Hello World";
+
+
+char Str1[21];
+
+char Name[][20] = {"Bhima","shankar","Amit", "manju", "Meena"};
+
+// there are 10 names each of max cap of 50 chars
+char Names[10][50];
+
+
+
+
+
+

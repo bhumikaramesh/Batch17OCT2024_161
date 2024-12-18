@@ -1,0 +1,87 @@
+/*
+
+user defined DT
+
+UDT
+
+structures
+unions
+enums
+
+struct, union, enum
+
+
+struct tagName
+{
+	members of structure	
+};
+
+
+struct Square
+{
+	int len;
+	int breadth;	
+};
+
+
+struct Chair
+{
+	int noLegs;
+	char make[20];
+	char material[20];
+	char clr[20];
+	float price;
+	char DOM[20];
+	char placeManu[20];
+
+};
+
+
+int a1,a2,;
+
+struct Square s1,s2,s3,sq[10];
+
+
+
+
+struct Square
+{
+	int len;
+	int breadth;	
+}s4,s5,s6,s[10];
+
+
+typdef struct Square SQR;
+
+SQR s7,s8,s9;
+
+
+typdef struct Square
+{
+	int len;
+	int breadth;	
+}SQR1;
+
+
+SQR1 s1;
+
+s1.len
+
+
+1) . => static var => nameVar.memberName
+2) -> => ptr var => nameVar->memberName
+
+SQR1 *ptr;
+
+ptr->len;
+
+
+
+
+void func(struct Square s)
+{
+	
+}
+
+
+*/

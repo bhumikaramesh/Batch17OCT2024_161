@@ -1,0 +1,9 @@
+./mod4/include/mod4_func.h
+./mod4/src/mod4_func.c
+./mod1/include/mod1_func.h
+./mod1/src/mod1_func.c
+./main/src/main.c
+./mod3/include/mod3_func.h
+./mod3/src/mod3_func.c
+./mod2/include/mod2_func.h
+./mod2/src/mod2_func.c

@@ -1,0 +1,15 @@
+/* Logs of RSE */
+[2024-12-13 03:58:37] INFO: Creating Socket
+[2024-12-13 03:58:37] INFO: Socket created
+[2024-12-13 03:58:37] INFO: Building Port
+[2024-12-13 03:58:37] INFO: Listening to clients
+[2024-12-13 03:59:13] INFO: Client connected
+[2024-12-13 03:59:15] DEBUG: Received request to list files
+[2024-12-13 03:59:15] DEBUG: Sent file list to client.
+[2024-12-13 03:59:17] DEBUG: Received request to search for a file.
+[2024-12-13 03:59:21] DEBUG: Sent search result to client.
+[2024-12-13 03:59:25] DEBUG: Received request to search for a pattern.
+[2024-12-13 03:59:28] DEBUG: Sent pattern search result to client.
+[2024-12-13 03:59:32] DEBUG: Received request to search for a pattern.
+[2024-12-13 03:59:35] DEBUG: Sent pattern search result to client.
+[2024-12-13 03:59:42] INFO: Client disconnected

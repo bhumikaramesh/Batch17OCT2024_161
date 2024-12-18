@@ -1,0 +1,175 @@
+        -:    0:Source:main.c
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/****************************************************************************************************
+        -:    2: * FILE NAME       : main.c
+        -:    3: *
+        -:    4: * DESCRIPTION     : This file contains main function which calls all other functions to
+        -:    5: *                   perform required operations
+        -:    6:                 
+        -:    7: *******************************************************************************************************/
+        -:    8:
+        -:    9:/*******************************************************************************************************
+        -:   10:*                           HEADER FILES
+        -:   11:*********************************************************************************************************/
+        -:   12:
+        -:   13:#include<string.h>
+        -:   14:#include<stdlib.h>
+        -:   15:#include<stdio.h>
+        -:   16:#include<unistd.h>
+        -:   17:#include<common.h>
+        -:   18:#include<cfss.h>
+        -:   19:#include<user.h>
+        -:   20:#include<log.h>
+        -:   21:
+        1:   22:int main()
+        -:   23:{
+        1:   24:	int choice = 0;
+        1:   25:	int flag = 1;
+        1:   26:	int flag1 = 1;
+        1:   27:	int ch = 1;
+        1:   28:	int uid = 0;
+        1:   29:	int temp = 0;
+        1:   30:	char number [MAX_BUFF]={'\0',};
+        1:   31:	char uName[MAX_BUFF]={'\0',};
+        1:   32:	char pNumber [MAX_BUFF] = {'\0',};
+        1:   33:	log_set_quiet(false);
+        1:   34:	log_set_level(LOG_TRACE);	
+        -:   35:
+        1:   36:	loadPDetails();/*loads user details from file and stores in the linked list */
+        1:   37:	loadCfss();/* This function is used to load user details from cfs database, and adds them to the linked list.*/
+        -:   38:	while(1)
+        -:   39:	{
+        -:   40:	//		log_trace("Software has been started");
+       29:   41:			switch(initialScreen())
+        -:   42:			{
+        4:   43:				case 1:
+        4:   44:					log_info("\n****SIGN UP****\n");
+        4:   45:					signUp();
+        4:   46:					sleep(2);
+        4:   47:					break;
+        7:   48:				case 2:
+        7:   49:					log_info("\n****SIGN IN****\n");
+        7:   50:					uid = signIn();
+        7:   51:					sleep(2);
+        7:   52:					if(uid == -1)
+        -:   53:					{
+        2:   54:						continue;
+        -:   55:					}
+        -:   56:					else
+        -:   57:					{
+        5:   58:						searchUser(uid,uName);
+        5:   59:						searchPhoneNumber(uid,pNumber);
+        5:   60:						flag = 1;
+       44:   61:						while(flag)
+        -:   62:						{
+       35:   63:							choice = mainScreen(uName);
+       35:   64:							switch(choice)
+        -:   65:							{
+        6:   66:								case 1:
+        6:   67:									flag1 = 1;
+        6:   68:									temp = 0;
+       33:   69:									while(flag1)
+        -:   70:									{
+       21:   71:										printf("\nEnter Call Forwarding Number: ");
+       21:   72:										bzero(number,MAX_BUFF);
+       21:   73:										scanf(" ");
+       21:   74:										fgets(number,MAX_BUFF,stdin);
+       21:   75:										number[strlen(number)-1]='\0';
+       21:   76:										temp=checkSamePNumber(pNumber,number);
+       21:   77:										if(temp!=-1)
+        -:   78:										{
+        6:   79:											flag1 = 0;
+        -:   80:
+        -:   81:										}
+        -:   82:									
+        -:   83:									}
+        -:   84:
+        6:   85:									ch=1;
+       22:   86:									while(ch)
+        -:   87:									{
+       10:   88:										choice = cfsScreen();
+       10:   89:										if(choice == 1)
+        -:   90:										{
+        -:   91:									
+        4:   92:											activateCfss(uid,number,"Unconditional");
+        4:   93:											ch = 0;
+        -:   94:										}
+        6:   95:										else if(choice == 2)
+        -:   96:										{
+        1:   97:											activateCfss(uid,number,"No Reply");
+        1:   98:											ch = 0;
+        -:   99:										}
+        5:  100:										else if(choice == 3)
+        -:  101:										{
+        1:  102:											activateCfss(uid,number,"Busy");
+        1:  103:											ch = 0;
+        -:  104:										}
+        -:  105:										else
+        -:  106:										{
+        4:  107:											printf("\nEnter correct choice!");
+        -:  108:										}
+        -:  109:									}
+        6:  110:									sleep(2);
+        6:  111:									break;
+        9:  112:								case 2:
+        9:  113:									log_info("\n****DEACTIVATING SERVICE****\n");
+        9:  114:									deactivateCfss(uid);
+        9:  115:									sleep(5);
+        9:  116:									break;
+        1:  117:								case 3:
+        1:  118:									log_info("\n****UNREGISTERING SERVICE****\n");
+        1:  119:									unregister(uid);
+        1:  120:									sleep(3);
+        1:  121:									uid = 0;
+        1:  122:									flag = 0;
+        1:  123:									break;
+       11:  124:								case 4:
+       11:  125:									makeCall(uid);
+       11:  126:									sleep(4);
+       11:  127:									break;
+        3:  128:								case 5:
+        3:  129:									uid = 0;
+        3:  130:									flag = 0;
+        3:  131:									printf("\nLogged Out Successfully!\n\n");
+        3:  132:									sleep(2);
+        3:  133:									break;
+        1:  134:								case 6:
+        1:  135:									writePDetails();
+        1:  136:									writeCfss();
+        1:  137:									freeUd();
+        1:  138:									freeCfs();
+        1:  139:									printf("\n\t\t*****************THANK YOU***************\n");
+        1:  140:									sleep(2);
+        -:  141:								
+        1:  142:									system("clear");
+        1:  143:									exit(0);
+        4:  144:								default:
+        4:  145:									log_warn("\nInvalid Choice!Try Again\n\n");
+        4:  146:									sleep(2);
+        4:  147:									break;
+        -:  148:
+        -:  149:							}
+        -:  150:						}
+        -:  151:					}
+        4:  152:					break;
+    #####:  153:				case 3:
+    #####:  154:					writePDetails();
+    #####:  155:					writeCfss();
+    #####:  156:					freeUd();
+    #####:  157:					freeCfs();
+    #####:  158:					printf("\n\t\t************************THANK YOU***********************\n");
+    #####:  159:					sleep(2);
+    #####:  160:                                	system("clear");
+    #####:  161:					exit(0);
+        4:  162:				default:
+        4:  163:					log_warn("\nInvalid Choice!\n\n");
+        4:  164:					sleep(2);
+        4:  165:					break;
+        -:  166:			}
+        -:  167:		}
+        -:  168:	return 0;
+        -:  169:}
+        -:  170:
